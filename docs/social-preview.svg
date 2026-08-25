@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#f4f1ed"/>
+  <rect width="1200" height="68" fill="#242321"/>
+  <g fill="#f8f6f3" font-family="-apple-system, BlinkMacSystemFont, Helvetica Neue, Arial, sans-serif">
+    <circle cx="40" cy="34" r="4" opacity=".8"/>
+    <text x="62" y="42" font-size="22" font-weight="700">Full Screen</text>
+    <text x="1117" y="42" font-size="20" font-weight="600">9:41</text>
+  </g>
+  <g fill="none" stroke="#f8f6f3" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+    <rect x="1041" y="17" width="34" height="31" rx="5"/>
+    <path d="M1043 27h30M1058 43V31M1052 37l6-6 6 6"/>
+  </g>
+  <rect x="0" y="68" width="1200" height="4" fill="#77716a"/>
+  <g font-family="-apple-system, BlinkMacSystemFont, Helvetica Neue, Arial, sans-serif">
+    <text x="82" y="151" fill="#65615d" font-size="23" font-weight="760" letter-spacing="3">MENU BAR GATE · NATIVE MACOS UTILITY</text>
+    <text x="78" y="286" fill="#191817" font-size="84" font-weight="760" letter-spacing="-4">Stop accidental</text>
+    <text x="78" y="382" fill="#191817" font-size="84" font-weight="760" letter-spacing="-4">menu bar reveals.</text>
+    <text x="82" y="462" fill="#4e4a46" font-size="31">Hold a key when you actually want to reach the top.</text>
+    <text x="82" y="548" fill="#191817" font-size="25" font-weight="700">No Hammerspoon. No Lua. System-wide.</text>
+    <text x="1118" y="548" fill="#65615d" font-size="22" font-weight="650" text-anchor="end">github.com/paulantomc/menu-bar-gate</text>
+  </g>
+</svg>

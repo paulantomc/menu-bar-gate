@@ -10,9 +10,9 @@
   <meta name="application-name" content="Menu Bar Gate">
   <link rel="canonical" href="https://paulantomc.github.io/menu-bar-gate/">
   <link rel="sitemap" type="application/xml" href="sitemap.xml" title="Sitemap">
-  <link rel="icon" type="image/png" href="app-icon.png">
-  <link rel="apple-touch-icon" href="app-icon.png">
-  <link rel="stylesheet" href="styles.css?v=2">
+  <link rel="icon" type="image/svg+xml" href="status-icon.svg">
+  <link rel="apple-touch-icon" href="status-icon.png">
+  <link rel="stylesheet" href="styles.css?v=3">
   <meta name="theme-color" content="#1c1b1a">
   <meta name="color-scheme" content="light">
 
@@ -22,16 +22,16 @@
   <meta property="og:title" content="Stop the Menu Bar Appearing in Full Screen on Your Mac">
   <meta property="og:description" content="A small, system-wide native Mac app. Hold a configurable key to reach the menu bar—no Hammerspoon or Lua required.">
   <meta property="og:url" content="https://paulantomc.github.io/menu-bar-gate/">
-  <meta property="og:image" content="https://paulantomc.github.io/menu-bar-gate/og.png">
+  <meta property="og:image" content="https://paulantomc.github.io/menu-bar-gate/social-preview.png">
   <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Menu Bar Gate app icon beside the words Stop accidental full-screen menu bar reveals">
+  <meta property="og:image:alt" content="Menu Bar Gate status icon in a Mac menu bar above the words Stop accidental full-screen menu bar reveals">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Stop the Menu Bar Appearing in Full Screen on Your Mac">
   <meta name="twitter:description" content="Stop accidental full-screen menu bar reveals. No Hammerspoon. No Lua.">
-  <meta name="twitter:image" content="https://paulantomc.github.io/menu-bar-gate/og.png">
-  <meta name="twitter:image:alt" content="Menu Bar Gate app icon beside the words Stop accidental full-screen menu bar reveals">
+  <meta name="twitter:image" content="https://paulantomc.github.io/menu-bar-gate/social-preview.png">
+  <meta name="twitter:image:alt" content="Menu Bar Gate status icon in a Mac menu bar above the words Stop accidental full-screen menu bar reveals">
 
   <script type="application/ld+json">
   {
@@ -40,11 +40,11 @@
       {
         "@type": "ImageObject",
         "@id": "https://paulantomc.github.io/menu-bar-gate/#primaryimage",
-        "url": "https://paulantomc.github.io/menu-bar-gate/og.png",
-        "contentUrl": "https://paulantomc.github.io/menu-bar-gate/og.png",
+        "url": "https://paulantomc.github.io/menu-bar-gate/social-preview.png",
+        "contentUrl": "https://paulantomc.github.io/menu-bar-gate/social-preview.png",
         "width": 1200,
         "height": 630,
-        "caption": "Menu Bar Gate — stop accidental full-screen menu bar reveals"
+        "caption": "Menu Bar Gate status icon — stop accidental full-screen menu bar reveals"
       },
       {
         "@type": "WebSite",
@@ -116,8 +116,8 @@
   <header class="site-header">
     <div class="shell header-inner">
       <a class="brand" href="https://github.com/paulantomc/menu-bar-gate" aria-label="Open Menu Bar Gate on GitHub">
-        <img src="app-icon.png" width="40" height="40" alt="">
-        <span>Menu Bar Gate</span>
+        <span class="status-symbol status-symbol-small" aria-hidden="true"><span></span></span>
+        <span class="brand-name">Menu Bar Gate</span>
       </a>
       <nav aria-label="Primary navigation">
         <a href="#how-it-works">How it works</a>
@@ -151,12 +151,26 @@
         <p class="release-note">Free to use · <a href="https://github.com/paulantomc/menu-bar-gate/releases/tag/v1.0.1">v1.0.1 release notes</a> · macOS 13+ · M1 or newer</p>
       </div>
 
-      <figure class="hero-art">
-        <div class="edge-line" aria-hidden="true"><span></span></div>
-        <a class="hero-art-link" href="https://github.com/paulantomc/menu-bar-gate" aria-label="See the Menu Bar Gate source code on GitHub">
-          <img src="app-icon.png" width="512" height="512" alt="Menu Bar Gate icon showing a pointer stopped under the top menu bar">
+      <figure class="status-preview">
+        <a class="status-preview-link" href="https://github.com/paulantomc/menu-bar-gate" aria-label="See how Menu Bar Gate works on GitHub">
+          <span class="mock-menu-bar" aria-hidden="true">
+            <span class="mock-menu-left"><span class="mock-apple">●</span><strong>Full Screen</strong></span>
+            <span class="mock-menu-right">
+              <span class="mock-wifi">⌁</span>
+              <span class="status-symbol status-symbol-light"><span></span></span>
+              <span class="mock-clock">9:41</span>
+            </span>
+          </span>
+          <span class="mock-desktop" aria-hidden="true">
+            <span class="protected-edge"><span>4 pt protected edge</span></span>
+            <span class="gate-arrow"><i></i></span>
+            <span class="gate-key"><kbd>Control</kbd><span>hold to pass</span></span>
+          </span>
+          <span class="status-preview-caption">
+            <strong>Lives quietly in your menu bar.</strong>
+            <span>Click the status icon to change the key, clearance, or full-screen setting.</span>
+          </span>
         </a>
-        <figcaption><kbd>Control</kbd><span>Hold to pass the gate</span></figcaption>
       </figure>
     </section>
 
@@ -383,7 +397,7 @@
 
     <section class="final-cta section-dark">
       <div class="shell narrow final-cta-inner">
-        <img src="app-icon.png" width="104" height="104" alt="">
+        <span class="status-symbol status-symbol-large status-symbol-light" aria-hidden="true"><span></span></span>
         <div>
           <p class="section-label">Menu Bar Gate</p>
           <h2>Keep the edge quiet until you mean it.</h2>
