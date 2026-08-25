@@ -34,5 +34,7 @@ cp "$BUILD_DIR/MenuBarGate" "$APP_DIR/Contents/MacOS/MenuBarGate"
 /usr/libexec/PlistBuddy -c 'Add :CFBundleVersion string 1' "$APP_DIR/Contents/Info.plist"
 /usr/libexec/PlistBuddy -c 'Add :LSMinimumSystemVersion string 13.0' "$APP_DIR/Contents/Info.plist"
 /usr/libexec/PlistBuddy -c 'Add :LSUIElement bool true' "$APP_DIR/Contents/Info.plist"
-codesign --force --sign - "$APP_DIR"
+codesign --force --sign - \
+  --requirements '=designated => identifier "com.local.MenuBarGate"' \
+  "$APP_DIR"
 echo "$APP_DIR"

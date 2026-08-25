@@ -16,7 +16,7 @@ Click the gate icon in the menu bar to pause protection, change the gate key, ad
 
 Choose **Launch at Login** from the gate menu if you want the utility to return automatically after restarting or signing back in.
 
-By default the edge is protected only when macOS reports that the menu bar is hidden. You can turn this off in Settings if you want protection everywhere.
+By default the edge is protected only while the frontmost app is in full screen. You can turn this off in Settings if you want protection everywhere.
 
 Run `scripts/test.sh` to exercise the edge and keybinding logic.
 

@@ -8,7 +8,7 @@ final class SettingsWindowController: NSWindowController {
     private let clearanceSlider = NSSlider(value: 4, minValue: 1, maxValue: 12,
                                             target: nil, action: nil)
     private let clearanceLabel = NSTextField(labelWithString: "")
-    private let fullscreenOnly = NSButton(checkboxWithTitle: "Protect only while the menu bar is hidden",
+    private let fullscreenOnly = NSButton(checkboxWithTitle: "Protect only in full screen",
                                           target: nil, action: nil)
     private var recordingMonitor: Any?
 
