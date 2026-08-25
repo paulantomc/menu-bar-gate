@@ -6,9 +6,7 @@ APP_PATH="$ROOT_DIR/outputs/MenuBarGate.app"
 DMG_PATH="$ROOT_DIR/outputs/MenuBarGate.dmg"
 STAGING_DIR="$ROOT_DIR/work/dmg-staging"
 
-if [[ ! -d "$APP_PATH" ]]; then
-  "$ROOT_DIR/scripts/build-app.sh" release
-fi
+"$ROOT_DIR/scripts/build-app.sh" release
 
 mkdir -p "$STAGING_DIR"
 rm -rf "$STAGING_DIR/MenuBarGate.app" "$STAGING_DIR/Applications"
