@@ -345,6 +345,9 @@ kbd {
   position: relative;
   z-index: 1;
   width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
   border-radius: 27%;
   filter: drop-shadow(0 22px 22px rgba(30, 28, 26, 0.22));
 }
@@ -353,6 +356,7 @@ kbd {
   position: relative;
   z-index: 1;
   display: block;
+  aspect-ratio: 1 / 1;
   border-radius: 27%;
   text-decoration: none;
   transition: transform 160ms ease;
