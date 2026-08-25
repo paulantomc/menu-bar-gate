@@ -1,7 +1,8 @@
 # Menu Bar Gate
 
-A tiny macOS menu-bar utility that prevents the pointer from touching the top edge unless a chosen gate key is held. This stops accidental menu-bar reveals in full-screen apps.
-
+Menu Bar Gate prevents the macOS menu bar from accidentally appearing when your mouse or trackpad cursor reaches the top of the screen in a full-screen app.
+Normally, macOS reveals the hidden menu bar whenever the pointer touches the top edge. This can cover browser tabs, editor tabs and other controls near the top of a full-screen window.
+Menu Bar Gate blocks the pointer just below the top edge. Hold a configurable key (Control by default) when you actually want to access the macOS menu bar.
 ## Build and run
 
 ```sh
@@ -32,3 +33,13 @@ Run `scripts/test.sh` to exercise the edge and keybinding logic.
 ## Uninstall
 
 Quit the app and move `MenuBarGate.app` to the Trash. Its small preferences entry is stored under `com.local.MenuBarGate` in your user defaults.
+
+## Why?
+
+In full-screen apps, macOS reveals the menu bar whenever your mouse or trackpad cursor touches the top edge of the screen.
+
+This can get annoying when you're trying to click browser tabs, editor tabs, or other controls near the top of a full-screen window. Overshoot by a few pixels and the menu bar drops down over what you were trying to click.
+
+Menu Bar Gate prevents this by stopping the cursor just before it reaches the menu-bar activation area. When you actually want to access the menu bar, simply hold your chosen gate key (Control by default) and move the cursor through. It can also work in Non fullscreen applications where the bar is still hidden. 
+
+The result is normal macOS full-screen behaviour without accidentally triggering the menu bar every time your cursor reaches the top of the screen.
