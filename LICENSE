@@ -1,21 +1,189 @@
-MIT License
+# Menu Bar Gate Source-Available License
 
-Copyright (c) 2026 paulantomc
+Copyright © 2026 Paul-Antoine Martineau-Casau. All rights reserved except as expressly granted under this License.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+## Plain-English Summary
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+Menu Bar Gate is free to use.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+You may use it personally, at work, at school, or within a business. You may inspect the source code, learn from it, modify it for your own use, create non-commercial forks, and contribute improvements.
+
+**You may not sell, license, monetize, commercially redistribute, or commercially exploit Menu Bar Gate, its source code, or a derivative of it without prior written permission from the Copyright Holder.**
+
+Using Menu Bar Gate while doing paid work or operating a business is allowed. A company may use it internally, and it does not matter if using the Software indirectly helps that company make money.
+
+The restriction is on making money **from Menu Bar Gate itself, its code, or a derivative product**, not on making money while using it.
+
+If you want to build, distribute, or sell a commercial product based on Menu Bar Gate or its code, you must first obtain permission from the Copyright Holder and, where applicable, agree to separate commercial terms.
+
+The terms below are the legally operative terms of this License.
+
+---
+
+## 1. Definitions
+
+**"Software"** means Menu Bar Gate and the source code, executable code, documentation, resources, and other materials distributed as part of the Menu Bar Gate project under this License.
+
+**"Copyright Holder"** means Paul-Antoine Martineau-Casau, or any person or entity to whom the relevant rights are subsequently assigned.
+
+**"You"** means any individual or legal entity exercising permissions granted by this License.
+
+**"Derivative Work"** means software or other material that is based upon, adapted from, modified from, translated from, incorporates, or contains a substantial portion of the Software or its source code.
+
+A work is not excluded from being a Derivative Work merely because it has been renamed, rebranded, reorganized, translated into another programming language, had portions rewritten, had comments or superficial elements changed, or has been combined with other software.
+
+**"Commercialize"** means to sell, license for payment, rent, charge for access to, commercially distribute, commercially sublicense, monetize, or otherwise directly or indirectly receive compensation specifically in exchange for the Software, a Derivative Work, or access to functionality substantially derived from the Software.
+
+Commercialization includes offering the Software or a Derivative Work as part of a paid product, paid bundle, paid subscription, paid service, or other commercial offering where the Software or Derivative Work forms a material part of the value being offered.
+
+Ordinary use of the Software in the course of employment or business does **not**, by itself, constitute Commercialization.
+
+## 2. Permission to Use
+
+Subject to the terms of this License, the Copyright Holder grants You a worldwide, royalty-free, non-exclusive licence to:
+
+1. download, install, and run the Software for personal, educational, research, professional, or business purposes;
+2. use the Software while performing paid work or operating a commercial business;
+3. inspect and study the source code;
+4. modify the Software for Your own use;
+5. create and distribute non-commercial modifications or Derivative Works;
+6. create non-commercial forks of the Software;
+7. submit modifications, patches, or other contributions to the original project; and
+8. internally copy and distribute the Software within an organization to its employees, contractors, members, or devices for that organization's own internal use.
+
+No fee or royalty is owed merely because the Software is used by a business or contributes indirectly to productivity, revenue, cost savings, or profit.
+
+## 3. Commercialization Is Reserved
+
+Except with the Copyright Holder's prior written permission or under a separate commercial licence, You may **not**:
+
+1. sell the Software;
+2. sell a Derivative Work;
+3. charge users to download, install, access, unlock, or use the Software or a Derivative Work;
+4. commercially license, sublicense, rent, or lease the Software or a Derivative Work;
+5. commercially redistribute the Software or a Derivative Work;
+6. rebrand, white-label, rename, or superficially modify the Software and commercially distribute or monetize the resulting product;
+7. incorporate all or a substantial portion of the Software into a paid product where that code or functionality forms a material part of the paid product;
+8. bundle the Software or a Derivative Work with a paid product or service for the purpose of avoiding the restrictions in this License;
+9. make access to the Software or a Derivative Work conditional upon payment for another product, subscription, membership, or service where the Software or Derivative Work forms a material part of what is being purchased;
+10. collect mandatory fees, subscriptions, licence charges, or other required compensation specifically for the Software or a Derivative Work; or
+11. authorize another person or entity to do any of the above.
+
+Changing the name, branding, icon, user interface, comments, formatting, architecture, programming language, or portions of the source code does not by itself remove these restrictions if the resulting work remains a Derivative Work.
+
+## 4. Permitted Business and Professional Use
+
+For clarity, this License **allows the Software to be used in commercial environments**.
+
+For example, a company may install Menu Bar Gate on employee computers and use it during ordinary paid work without purchasing a commercial licence.
+
+A freelancer, employee, student, developer, or business owner may use Menu Bar Gate while performing work for which they are paid.
+
+An organization may internally deploy Menu Bar Gate across multiple devices for its own use.
+
+A person or business does not violate this License merely because using the Software improves productivity, reduces costs, assists employees, contributes to the operation of a business, or indirectly contributes to revenue or profit.
+
+A separate commercial licence is required only where the Software, its code, a Derivative Work, or functionality substantially derived from it is itself being Commercialized as described in this License.
+
+## 5. Non-Commercial Distribution and Forks
+
+You may redistribute the Software or a Derivative Work without charge for non-commercial purposes provided that:
+
+1. this License is included with the distributed Software or Derivative Work;
+2. all existing copyright and attribution notices are retained;
+3. You clearly identify material modifications You have made;
+4. You do not represent Your modified version as an official release of Menu Bar Gate;
+5. You do not imply endorsement, sponsorship, or approval by the Copyright Holder; and
+6. You do not impose terms that purport to grant recipients commercial rights that You do not possess under this License.
+
+Recipients of such distributions receive rights only under the terms of this License.
+
+## 6. No Circumvention
+
+You may not structure a transaction, distribution arrangement, bundle, subscription, service, affiliate arrangement, donation requirement, mandatory membership, or other scheme primarily for the purpose of circumventing the commercial restrictions of this License.
+
+The fact that the Software or Derivative Work is nominally provided for "free" does not prevent an arrangement from constituting Commercialization where payment for another product, service, subscription, membership, or bundle is effectively required to obtain or use it and the Software or Derivative Work forms a material part of the value being offered.
+
+Genuine voluntary donations are permitted provided that payment is not required to download, obtain, access, use, unlock, update, or exercise rights granted under this License.
+
+## 7. Commercial Licensing
+
+The Copyright Holder reserves all rights to commercially license the Software and Derivative Works.
+
+Nothing in this License requires the Copyright Holder to grant commercial rights or to offer them on any particular terms.
+
+Any person or organization wishing to Commercialize the Software or a Derivative Work must obtain prior written permission from the Copyright Holder or enter into a separate commercial licence with the Copyright Holder.
+
+Commercial terms may include licence fees, royalties, revenue sharing, profit sharing, or other compensation as separately agreed.
+
+Permission granted to one person or organization does not grant equivalent commercial rights to any other person or organization.
+
+## 8. Contributions
+
+Unless otherwise agreed in writing, by intentionally submitting source code, patches, documentation, or other copyrightable material for inclusion in the official Menu Bar Gate project, You grant the Copyright Holder a perpetual, worldwide, irrevocable, non-exclusive, royalty-free, transferable and sublicensable licence to use, reproduce, modify, create derivative works from, distribute, publicly display, publicly perform, license, sublicense, and Commercialize that contribution as part of Menu Bar Gate or related works.
+
+You retain copyright ownership of Your contribution unless You separately agree to assign it.
+
+You represent that You have the legal right to submit the contribution and to grant the rights described above.
+
+Nothing in this section requires the Copyright Holder to accept or include a contribution.
+
+## 9. Ownership and Reserved Rights
+
+The Software is licensed, not sold.
+
+Except for the limited permissions expressly granted by this License, all copyright and other intellectual-property rights in the Software are reserved by the Copyright Holder.
+
+No rights are granted by implication, estoppel, or otherwise beyond those expressly stated in this License.
+
+This License does not grant permission to use the name **Menu Bar Gate**, its logos, icons, or associated branding in a manner that falsely suggests that a modified or redistributed version is official, endorsed, sponsored, or approved by the Copyright Holder.
+
+## 10. Termination
+
+Your rights under this License terminate automatically if You materially violate its terms.
+
+Upon termination, You must cease any activity that relied upon permissions granted by this License and cease distribution or Commercialization of copies or Derivative Works made or distributed in violation of it.
+
+Termination does not waive, extinguish, or otherwise affect any rights, claims, or remedies arising from a violation occurring before or after termination.
+
+The Copyright Holder may, at their sole discretion, reinstate Your rights through written permission.
+
+Sections concerning ownership, Commercialization restrictions, contributions, warranty, liability, and other provisions that by their nature should survive termination shall survive termination.
+
+## 11. No Warranty
+
+THE SOFTWARE IS PROVIDED &#x2A;*"AS IS"**, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, AND NON-INFRINGEMENT.
+
+YOU USE THE SOFTWARE AT YOUR OWN RISK.
+
+THE COPYRIGHT HOLDER DOES NOT WARRANT THAT THE SOFTWARE WILL BE ERROR-FREE, UNINTERRUPTED, SECURE, COMPATIBLE WITH ANY PARTICULAR VERSION OF macOS, OR SUITABLE FOR ANY PARTICULAR PURPOSE.
+
+## 12. Limitation of Liability
+
+TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, THE COPYRIGHT HOLDER AND CONTRIBUTORS SHALL NOT BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, CONSEQUENTIAL, OR OTHER DAMAGES, LOSSES, COSTS, OR LIABILITIES ARISING FROM OR RELATED TO THE SOFTWARE, ITS USE, INABILITY TO USE IT, OR THIS LICENSE, WHETHER IN CONTRACT, TORT, NEGLIGENCE, STRICT LIABILITY, OR OTHERWISE.
+
+Nothing in this License excludes or limits liability to the extent that such exclusion or limitation is prohibited by applicable law.
+
+## 13. Severability
+
+If any provision of this License is held invalid, illegal, or unenforceable, that provision shall, where legally possible, be interpreted or limited to the minimum extent necessary to make it valid and enforceable while preserving its intended purpose.
+
+If that is not possible, the provision shall be severed.
+
+The invalidity or unenforceability of one provision shall not affect the validity or enforceability of the remaining provisions.
+
+## 14. No Waiver
+
+Failure or delay by the Copyright Holder in enforcing any provision of this License does not constitute a waiver of that provision or of the right to enforce it later.
+
+A waiver relating to one violation does not constitute a waiver relating to any other violation.
+
+## 15. Entire License
+
+This License constitutes the terms under which the Copyright Holder permits use, modification, and distribution of the Software unless a separate written agreement between the Copyright Holder and the relevant person or entity applies.
+
+No permission beyond the rights expressly granted by this License should be inferred.
+
+---
+
+**In short: use it, use it at work, learn from it, modify it, and share it non-commercially. Just don't turn Menu Bar Gate, its code, or a derivative of it into something you sell or monetize.**
