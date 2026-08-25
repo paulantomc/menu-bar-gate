@@ -1,0 +1,38 @@
+# Menu Bar Gate
+
+> Menu Bar Gate is a small, system-wide native macOS utility that prevents accidental menu bar reveals when the pointer reaches the top edge of a full-screen app.
+
+Canonical website: https://paulantomc.github.io/menu-bar-gate/
+Source repository: https://github.com/paulantomc/menu-bar-gate
+Latest release: https://github.com/paulantomc/menu-bar-gate/releases/latest
+Current version: 1.0.1
+Requirements: macOS 13 or later; the current prebuilt release requires Apple silicon.
+Price: Free to use under the project's source-available license.
+
+## Behavior
+
+- In full-screen apps, the pointer stops 4 points below the top edge by default.
+- Holding a configurable gate key, Control by default, allows the pointer to pass through and reveal the menu bar normally.
+- Protection is system-wide and full-screen-only by default.
+- The gate key, clearance, scope, paused state, and Launch at Login setting are configurable in the app.
+- No Hammerspoon setup or Lua scripts are required.
+
+## Accessibility and privacy
+
+Accessibility permission is required because macOS protects system-wide input event taps and frontmost-window accessibility attributes. Menu Bar Gate uses it to observe pointer movement and the selected key state, adjust only the pointer's vertical coordinate near the top edge, and determine whether the frontmost window is full screen.
+
+The app does not capture the screen, read screen pixels, inspect files or window contents, use networking, collect analytics, create an account, or load third-party packages. Preferences are stored locally in macOS user defaults.
+
+## Source inspection
+
+- Event tap: https://github.com/paulantomc/menu-bar-gate/blob/main/Sources/MenuBarGate/EventGate.swift
+- Full-screen detection: https://github.com/paulantomc/menu-bar-gate/blob/main/Sources/MenuBarGate/FullscreenDetector.swift
+- Pointer clamp and shortcut matching: https://github.com/paulantomc/menu-bar-gate/blob/main/Sources/MenuBarGate/GateBinding.swift
+- Local preferences: https://github.com/paulantomc/menu-bar-gate/blob/main/Sources/MenuBarGate/Preferences.swift
+
+## Release disclosure
+
+Version 1.0.1 is ad-hoc signed and is not yet Developer ID signed or notarized. macOS may require Control-click, then Open, on first launch. Signing and notarization are tracked publicly: https://github.com/paulantomc/menu-bar-gate/issues/1
+
+Intel or universal build requests and other suggestions: https://github.com/paulantomc/menu-bar-gate/issues/new
+License: https://github.com/paulantomc/menu-bar-gate/blob/main/LICENSE

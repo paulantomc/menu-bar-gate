@@ -2,6 +2,8 @@
 
 Menu Bar Gate is a small, system-wide native macOS utility that prevents the menu bar from accidentally appearing when your mouse or trackpad reaches the top of the screen in a full-screen app. Normally, macOS reveals the hidden menu bar there, covering browser tabs, editor tabs, and other controls near the top of the window.
 
+**Website:** [paulantomc.github.io/menu-bar-gate](https://paulantomc.github.io/menu-bar-gate/)
+
 Menu Bar Gate stops the pointer just below the top edge. Hold a configurable gate key—Control by default—when you actually want to pass through and reveal the menu bar. Protection runs only in full screen by default, or it can work across non-full-screen apps whenever the menu bar is hidden.
 
 **No Hammerspoon setup or Lua scripts required.** It is a standalone menu-bar app with no third-party dependencies.
@@ -69,4 +71,4 @@ Quit Menu Bar Gate and move `MenuBarGate.app` to the Trash. Its small preference
 
 ## License
 
-[MIT](LICENSE)
+[Menu Bar Gate Source-Available License](LICENSE)
