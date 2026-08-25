@@ -10,6 +10,15 @@ scripts/build-app.sh
 open "outputs/MenuBarGate.app"
 ```
 
+## Install the downloadable app
+
+1. Download and open `MenuBarGate.dmg` from the latest GitHub Release.
+2. Drag `MenuBarGate.app` onto the **Applications** shortcut.
+3. Open MenuBarGate from the Applications folder. If macOS blocks the first launch, Control-click the app and choose **Open**.
+4. Allow MenuBarGate in **System Settings → Privacy & Security → Accessibility**.
+
+To build the drag-and-drop installer locally, run `scripts/build-dmg.sh`.
+
 On first launch, allow **Menu Bar Gate** in **System Settings → Privacy & Security → Accessibility**. Quit and reopen it if macOS asks you to do so.
 
 Click the gate icon in the menu bar to pause protection, change the gate key, adjust the edge clearance, retry permission, or quit. The default gate is Control and the default clearance is 4 points.
