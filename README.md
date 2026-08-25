@@ -59,6 +59,10 @@ scripts/test.sh
 
 The self-tests cover edge clamping, gate-key release, multiple display coordinates, shortcut matching, and full-screen detection geometry.
 
+## Feedback and requests
+
+Found a bug, compatibility problem, or have an idea? [Open an issue](https://github.com/paulantomc/menu-bar-gate/issues/new). The current download is Apple-silicon-only; if you need an Intel or universal build, please add a request there. One can be added if there is demand.
+
 ## Uninstall
 
 Quit Menu Bar Gate and move `MenuBarGate.app` to the Trash. Its small preferences entry is stored under `com.local.MenuBarGate` in your user defaults.
