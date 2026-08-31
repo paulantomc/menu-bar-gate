@@ -2,6 +2,7 @@
 set -euo pipefail
 
 ROOT_DIR="${0:A:h:h}"
+source "$ROOT_DIR/scripts/build-settings.sh"
 CONFIGURATION="${1:-release}"
 OUTPUT_DIR="$ROOT_DIR/outputs"
 APP_DIR="$OUTPUT_DIR/MenuBarGate.app"
@@ -9,16 +10,14 @@ BUILD_DIR="$ROOT_DIR/work/build"
 MODULE_CACHE="$ROOT_DIR/work/clang-cache"
 ICON_FILE="$ROOT_DIR/Assets/MenuBarGate.icns"
 SDK="${MENUBARGATE_SDK:-$(xcrun --sdk macosx --show-sdk-path)}"
-# This machine's newest SDK is one patch ahead of its Swift standard library.
-[[ -d /Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk ]] && \
-  SDK="${MENUBARGATE_SDK:-/Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk}"
 
 cd "$ROOT_DIR"
 mkdir -p "$BUILD_DIR" "$MODULE_CACHE"
 OPTIMIZATION="-O"
 [[ "$CONFIGURATION" == "debug" ]] && OPTIMIZATION="-Onone"
 CLANG_MODULE_CACHE_PATH="$MODULE_CACHE" swiftc \
-  -sdk "$SDK" -module-cache-path "$MODULE_CACHE" -parse-as-library "$OPTIMIZATION" \
+  -target "$MENUBARGATE_TARGET" -sdk "$SDK" \
+  -module-cache-path "$MODULE_CACHE" -parse-as-library "$OPTIMIZATION" \
   Sources/MenuBarGate/*.swift -o "$BUILD_DIR/MenuBarGate" \
   -framework AppKit -framework ApplicationServices -framework CoreGraphics \
   -framework ServiceManagement
@@ -38,12 +37,13 @@ cp "$ICON_FILE" "$APP_DIR/Contents/Resources/MenuBarGate.icns"
 /usr/libexec/PlistBuddy -c 'Add :CFBundleName string Menu Bar Gate' "$APP_DIR/Contents/Info.plist"
 /usr/libexec/PlistBuddy -c 'Add :CFBundleDisplayName string Menu Bar Gate' "$APP_DIR/Contents/Info.plist"
 /usr/libexec/PlistBuddy -c 'Add :CFBundlePackageType string APPL' "$APP_DIR/Contents/Info.plist"
-/usr/libexec/PlistBuddy -c 'Add :CFBundleShortVersionString string 1.0.1' "$APP_DIR/Contents/Info.plist"
-/usr/libexec/PlistBuddy -c 'Add :CFBundleVersion string 2' "$APP_DIR/Contents/Info.plist"
+/usr/libexec/PlistBuddy -c 'Add :CFBundleShortVersionString string 1.1.1' "$APP_DIR/Contents/Info.plist"
+/usr/libexec/PlistBuddy -c 'Add :CFBundleVersion string 4' "$APP_DIR/Contents/Info.plist"
 /usr/libexec/PlistBuddy -c 'Add :CFBundleIconFile string MenuBarGate.icns' "$APP_DIR/Contents/Info.plist"
-/usr/libexec/PlistBuddy -c 'Add :LSMinimumSystemVersion string 13.0' "$APP_DIR/Contents/Info.plist"
+/usr/libexec/PlistBuddy -c "Add :LSMinimumSystemVersion string $MENUBARGATE_MIN_MACOS" "$APP_DIR/Contents/Info.plist"
 /usr/libexec/PlistBuddy -c 'Add :LSUIElement bool true' "$APP_DIR/Contents/Info.plist"
 codesign --force --sign - \
   --requirements '=designated => identifier "com.local.MenuBarGate"' \
   "$APP_DIR"
+"$ROOT_DIR/scripts/verify-app.sh" "$APP_DIR"
 echo "$APP_DIR"

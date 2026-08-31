@@ -49,8 +49,17 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     private func refreshMenu() {
         enabledItem.state = Preferences.shared.isEnabled ? .on : .off
-        enabledItem.title = "Protection Enabled — hold \(Preferences.shared.binding.displayName) to release"
+        enabledItem.title = switch Preferences.shared.releaseMode {
+        case .key:
+            "Protection Enabled — hold \(Preferences.shared.binding.displayName) to release"
+        case .delay:
+            "Protection Enabled — wait \(formattedDelay(Preferences.shared.releaseDelay)) at the top"
+        }
         launchAtLoginItem.state = SMAppService.mainApp.status == .enabled ? .on : .off
+    }
+
+    private func formattedDelay(_ value: Double) -> String {
+        value == value.rounded() ? String(format: "%.0f s", value) : String(format: "%.2g s", value)
     }
 
     @objc private func toggleEnabled() {

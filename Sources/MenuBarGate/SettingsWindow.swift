@@ -4,16 +4,23 @@ import CoreGraphics
 @MainActor
 final class SettingsWindowController: NSWindowController {
     var onChange: (() -> Void)?
+    private let explanation = NSTextField(wrappingLabelWithString: "")
+    private let releaseModePopUp = NSPopUpButton(frame: .zero, pullsDown: false)
     private let bindingButton = NSButton(title: "", target: nil, action: nil)
+    private let delaySlider = NSSlider(value: 0.75, minValue: 0.25, maxValue: 3,
+                                       target: nil, action: nil)
+    private let delayLabel = NSTextField(labelWithString: "")
     private let clearanceSlider = NSSlider(value: 4, minValue: 1, maxValue: 12,
                                             target: nil, action: nil)
     private let clearanceLabel = NSTextField(labelWithString: "")
     private let fullscreenOnly = NSButton(checkboxWithTitle: "Protect only in full screen",
                                           target: nil, action: nil)
     private var recordingMonitor: Any?
+    private weak var bindingRow: NSStackView?
+    private weak var delayRow: NSStackView?
 
     init() {
-        let window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 430, height: 245),
+        let window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 455, height: 300),
                               styleMask: [.titled, .closable], backing: .buffered, defer: false)
         window.title = "Menu Bar Gate Settings"
         window.center()
@@ -33,19 +40,31 @@ final class SettingsWindowController: NSWindowController {
         guard let content = window?.contentView else { return }
         let title = NSTextField(labelWithString: "Keep the menu bar out of accidental reach")
         title.font = .systemFont(ofSize: 17, weight: .semibold)
-        let explanation = NSTextField(wrappingLabelWithString:
-            "The pointer stops just below the top edge. Hold your gate key while moving upward to reveal the menu bar.")
         explanation.textColor = .secondaryLabelColor
 
+        releaseModePopUp.addItems(withTitles: GateReleaseMode.allCases.map(\.displayName))
+        releaseModePopUp.target = self
+        releaseModePopUp.action = #selector(releaseModeChanged)
         bindingButton.target = self
         bindingButton.action = #selector(recordBinding)
         bindingButton.bezelStyle = .rounded
+        delaySlider.numberOfTickMarks = 12
+        delaySlider.allowsTickMarkValuesOnly = true
+        delaySlider.target = self
+        delaySlider.action = #selector(delayChanged)
         clearanceSlider.target = self
         clearanceSlider.action = #selector(clearanceChanged)
         fullscreenOnly.target = self
         fullscreenOnly.action = #selector(fullscreenOnlyChanged)
 
+        let releaseModeRow = row(label: "Release method", control: releaseModePopUp)
         let bindingRow = row(label: "Gate key", control: bindingButton)
+        self.bindingRow = bindingRow
+        let delayStack = NSStackView(views: [delaySlider, delayLabel])
+        delayStack.orientation = .horizontal
+        delayStack.spacing = 10
+        let delayRow = row(label: "Wait time", control: delayStack)
+        self.delayRow = delayRow
         let sliderStack = NSStackView(views: [clearanceSlider, clearanceLabel])
         sliderStack.orientation = .horizontal
         sliderStack.spacing = 10
@@ -54,7 +73,8 @@ final class SettingsWindowController: NSWindowController {
                                   action: #selector(openAccessibilitySettings))
         permission.bezelStyle = .rounded
 
-        let stack = NSStackView(views: [title, explanation, bindingRow, clearanceRow, fullscreenOnly, permission])
+        let stack = NSStackView(views: [title, explanation, releaseModeRow, bindingRow, delayRow,
+                                        clearanceRow, fullscreenOnly, permission])
         stack.orientation = .vertical
         stack.alignment = .leading
         stack.spacing = 15
@@ -64,7 +84,10 @@ final class SettingsWindowController: NSWindowController {
             stack.leadingAnchor.constraint(equalTo: content.leadingAnchor, constant: 24),
             stack.trailingAnchor.constraint(equalTo: content.trailingAnchor, constant: -24),
             stack.topAnchor.constraint(equalTo: content.topAnchor, constant: 22),
+            stack.bottomAnchor.constraint(equalTo: content.bottomAnchor, constant: -22),
+            releaseModeRow.widthAnchor.constraint(equalTo: stack.widthAnchor),
             bindingRow.widthAnchor.constraint(equalTo: stack.widthAnchor),
+            delayRow.widthAnchor.constraint(equalTo: stack.widthAnchor),
             clearanceRow.widthAnchor.constraint(equalTo: stack.widthAnchor),
             explanation.widthAnchor.constraint(equalTo: stack.widthAnchor)
         ])
@@ -82,10 +105,39 @@ final class SettingsWindowController: NSWindowController {
     }
 
     private func refresh() {
+        let mode = Preferences.shared.releaseMode
+        releaseModePopUp.selectItem(at: GateReleaseMode.allCases.firstIndex(of: mode) ?? 0)
         bindingButton.title = Preferences.shared.binding.displayName + " — Change…"
+        bindingButton.isEnabled = mode == .key
+        bindingRow?.isHidden = mode != .key
+        delaySlider.doubleValue = Preferences.shared.releaseDelay
+        delaySlider.isEnabled = mode == .delay
+        delayLabel.stringValue = formattedDelay(Preferences.shared.releaseDelay)
+        delayLabel.textColor = mode == .delay ? .labelColor : .disabledControlTextColor
+        delayRow?.isHidden = mode != .delay
         clearanceSlider.doubleValue = Preferences.shared.clearance
         clearanceLabel.stringValue = "\(Int(Preferences.shared.clearance)) pt"
         fullscreenOnly.state = Preferences.shared.onlyWhenMenuBarHidden ? .on : .off
+        explanation.stringValue = switch mode {
+        case .key:
+            "The pointer stops just below the top edge. Hold your gate key while moving upward to reveal the menu bar."
+        case .delay:
+            "The pointer stops just below the top edge. Keep it there and the menu bar appears after your chosen wait time."
+        }
+    }
+
+    private func formattedDelay(_ value: Double) -> String {
+        value == value.rounded() ? String(format: "%.0f s", value) : String(format: "%.2g s", value)
+    }
+
+    @objc private func releaseModeChanged() {
+        let modes = GateReleaseMode.allCases
+        let selectedIndex = releaseModePopUp.indexOfSelectedItem
+        guard modes.indices.contains(selectedIndex) else { return }
+        finishRecording(nil)
+        Preferences.shared.releaseMode = modes[selectedIndex]
+        refresh()
+        onChange?()
     }
 
     @objc private func recordBinding() {
@@ -110,6 +162,12 @@ final class SettingsWindowController: NSWindowController {
         recordingMonitor = nil
         if let binding { Preferences.shared.binding = binding; onChange?() }
         refresh()
+    }
+
+    @objc private func delayChanged() {
+        Preferences.shared.releaseDelay = (delaySlider.doubleValue * 4).rounded() / 4
+        refresh()
+        onChange?()
     }
 
     @objc private func clearanceChanged() {

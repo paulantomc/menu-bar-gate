@@ -31,6 +31,20 @@ final class Preferences {
         set { defaults.set(newValue, forKey: "onlyWhenMenuBarHidden") }
     }
 
+    var releaseMode: GateReleaseMode {
+        get {
+            guard let rawValue = defaults.string(forKey: "releaseMode"),
+                  let mode = GateReleaseMode(rawValue: rawValue) else { return .key }
+            return mode
+        }
+        set { defaults.set(newValue.rawValue, forKey: "releaseMode") }
+    }
+
+    var releaseDelay: Double {
+        get { defaults.object(forKey: "releaseDelay") as? Double ?? 0.75 }
+        set { defaults.set(min(3, max(0.25, newValue)), forKey: "releaseDelay") }
+    }
+
     var binding: GateBinding {
         get {
             guard let data = defaults.data(forKey: "binding"),

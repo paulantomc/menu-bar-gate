@@ -51,12 +51,20 @@ struct GateBinding: Codable, Equatable, Sendable {
 }
 
 enum EdgeClamp {
+    static func display(containing point: CGPoint, displays: [CGRect]) -> CGRect? {
+        displays.first(where: { $0.contains(point) ||
+            (point.x >= $0.minX && point.x <= $0.maxX && abs(point.y - $0.minY) < 0.5)
+        })
+    }
+
+    static func boundary(for display: CGRect, clearance: CGFloat) -> CGFloat {
+        display.minY + max(1, clearance)
+    }
+
     static func clampedLocation(_ point: CGPoint, displays: [CGRect], clearance: CGFloat, gateHeld: Bool) -> CGPoint {
         guard !gateHeld else { return point }
-        guard let display = displays.first(where: { $0.contains(point) ||
-            (point.x >= $0.minX && point.x <= $0.maxX && abs(point.y - $0.minY) < 0.5)
-        }) else { return point }
-        let boundary = display.minY + max(1, clearance)
+        guard let display = display(containing: point, displays: displays) else { return point }
+        let boundary = boundary(for: display, clearance: clearance)
         guard point.y < boundary else { return point }
         return CGPoint(x: point.x, y: boundary)
     }

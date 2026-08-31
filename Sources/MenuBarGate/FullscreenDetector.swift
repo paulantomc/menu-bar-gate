@@ -13,7 +13,7 @@ enum FullscreenDetector {
                                         &focusedValue) == .success,
            let focusedValue,
            CFGetTypeID(focusedValue) == AXUIElementGetTypeID() {
-            let windowElement = unsafeBitCast(focusedValue, to: AXUIElement.self)
+            let windowElement = unsafeDowncast(focusedValue, to: AXUIElement.self)
             var fullscreenValue: CFTypeRef?
             if AXUIElementCopyAttributeValue(windowElement,
                                              "AXFullScreen" as CFString,

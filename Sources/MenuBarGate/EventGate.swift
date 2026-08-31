@@ -1,6 +1,6 @@
 import AppKit
-import ApplicationServices
-import CoreGraphics
+@preconcurrency import ApplicationServices
+@preconcurrency import CoreGraphics
 
 @MainActor
 final class EventGate {
@@ -12,6 +12,9 @@ final class EventGate {
     private var currentFlags: CGEventFlags = []
     private var displays: [CGRect] = []
     private var enabled = false
+    private var delayedRelease = DelayedReleaseState()
+    private var delayedReleaseTask: Task<Void, Never>?
+    private var delayedDisplay: CGRect?
 
     func start(promptForPermission: Bool = true) {
         stop()
@@ -56,6 +59,7 @@ final class EventGate {
         runLoopSource = nil
         heldKeyCodes.removeAll()
         currentFlags = []
+        resetDelayedRelease()
     }
 
     func restart() { start(promptForPermission: false) }
@@ -86,16 +90,101 @@ final class EventGate {
             if type == .keyUp { heldKeyCodes.remove(UInt16(event.getIntegerValueField(.keyboardEventKeycode))) }
 
             if type == .mouseMoved || type == .leftMouseDragged || type == .rightMouseDragged || type == .otherMouseDragged {
-                if Preferences.shared.onlyWhenMenuBarHidden && !FullscreenDetector.frontmostAppIsFullscreen(displays: displays) {
+                guard shouldProtectPointer() else {
+                    resetDelayedRelease()
                     return Unmanaged.passUnretained(event)
                 }
-                let binding = Preferences.shared.binding
-                let held = binding.isHeld(flags: currentFlags, heldKeyCodes: heldKeyCodes)
-                let clamped = EdgeClamp.clampedLocation(event.location, displays: displays,
-                                                        clearance: Preferences.shared.clearance, gateHeld: held)
-                if clamped != event.location { event.location = clamped }
+
+                switch Preferences.shared.releaseMode {
+                case .key:
+                    resetDelayedRelease()
+                    let binding = Preferences.shared.binding
+                    let held = binding.isHeld(flags: currentFlags, heldKeyCodes: heldKeyCodes)
+                    let clamped = EdgeClamp.clampedLocation(event.location, displays: displays,
+                                                            clearance: Preferences.shared.clearance,
+                                                            gateHeld: held)
+                    if clamped != event.location { event.location = clamped }
+                case .delay:
+                    handleDelayedRelease(event: event)
+                }
             }
             return Unmanaged.passUnretained(event)
         }
+    }
+
+    private func shouldProtectPointer() -> Bool {
+        !Preferences.shared.onlyWhenMenuBarHidden ||
+            FullscreenDetector.frontmostAppIsFullscreen(displays: displays)
+    }
+
+    private func handleDelayedRelease(event: CGEvent) {
+        let location = event.location
+        let clearance = Preferences.shared.clearance
+        guard let display = EdgeClamp.display(containing: location, displays: displays) else {
+            resetDelayedRelease()
+            return
+        }
+        let boundary = EdgeClamp.boundary(for: display, clearance: clearance)
+
+        if delayedRelease.permitsPassThrough {
+            if delayedDisplay != display || location.y > boundary + 2 {
+                resetDelayedRelease()
+            }
+            return
+        }
+
+        let clamped = EdgeClamp.clampedLocation(location, displays: displays,
+                                                clearance: clearance, gateHeld: false)
+        if clamped != location {
+            event.location = clamped
+            delayedDisplay = display
+            if delayedRelease.touchedGate() {
+                scheduleDelayedRelease(after: Preferences.shared.releaseDelay)
+            }
+        } else if location.y > boundary + 0.5 {
+            resetDelayedRelease()
+        }
+    }
+
+    private func scheduleDelayedRelease(after delay: TimeInterval) {
+        delayedReleaseTask?.cancel()
+        let nanoseconds = UInt64(delay * 1_000_000_000)
+        delayedReleaseTask = Task { @MainActor [weak self] in
+            do {
+                try await Task.sleep(nanoseconds: nanoseconds)
+            } catch {
+                return
+            }
+            self?.completeDelayedRelease()
+        }
+    }
+
+    private func completeDelayedRelease() {
+        delayedReleaseTask = nil
+        guard Preferences.shared.releaseMode == .delay,
+              shouldProtectPointer(),
+              let display = delayedDisplay,
+              let pointerEvent = CGEvent(source: nil) else {
+            resetDelayedRelease()
+            return
+        }
+
+        let location = pointerEvent.location
+        let boundary = EdgeClamp.boundary(for: display, clearance: Preferences.shared.clearance)
+        guard EdgeClamp.display(containing: location, displays: displays) == display,
+              abs(location.y - boundary) <= 1,
+              delayedRelease.delayCompleted() else {
+            resetDelayedRelease()
+            return
+        }
+
+        CGWarpMouseCursorPosition(CGPoint(x: location.x, y: display.minY))
+    }
+
+    private func resetDelayedRelease() {
+        delayedReleaseTask?.cancel()
+        delayedReleaseTask = nil
+        delayedDisplay = nil
+        delayedRelease.reset()
     }
 }

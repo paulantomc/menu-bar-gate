@@ -35,6 +35,37 @@ struct MenuBarGateTests {
         #expect(!binding.isHeld(flags: [], heldKeyCodes: [48]))
     }
 
+    @Test func delayedReleaseWaitsThenPassesThrough() {
+        var state = DelayedReleaseState()
+        #expect(state.phase == .idle)
+        let firstContactStartedDelay = state.touchedGate()
+        #expect(firstContactStartedDelay)
+        #expect(state.phase == .waiting)
+        let secondContactStartedDelay = state.touchedGate()
+        #expect(!secondContactStartedDelay)
+        let firstCompletionReleased = state.delayCompleted()
+        #expect(firstCompletionReleased)
+        #expect(state.permitsPassThrough)
+        let secondCompletionReleased = state.delayCompleted()
+        #expect(!secondCompletionReleased)
+    }
+
+    @Test func movingAwayResetsDelayedRelease() {
+        var state = DelayedReleaseState()
+        let contactStartedDelay = state.touchedGate()
+        #expect(contactStartedDelay)
+        state.reset()
+        #expect(state.phase == .idle)
+        #expect(!state.permitsPassThrough)
+        let completionReleased = state.delayCompleted()
+        #expect(!completionReleased)
+    }
+
+    @Test func releaseModesHaveClearLabels() {
+        #expect(GateReleaseMode.key.displayName == "Hold a key")
+        #expect(GateReleaseMode.delay.displayName == "Wait at edge")
+    }
+
     @Test func recognizesFullscreenGeometryWithinTolerance() {
         let display = CGRect(x: 0, y: 0, width: 1920, height: 1080)
         #expect(FullscreenDetector.isFullscreenFrame(display, display: display))
