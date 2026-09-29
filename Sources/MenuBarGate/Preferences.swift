@@ -2,6 +2,7 @@ import Foundation
 
 @MainActor
 final class Preferences {
+    static let clearanceRange: ClosedRange<Double> = 1...100
     static let shared = Preferences()
     private let defaults = UserDefaults.standard
 
@@ -23,7 +24,7 @@ final class Preferences {
 
     var clearance: Double {
         get { defaults.object(forKey: "clearance") as? Double ?? 4 }
-        set { defaults.set(min(12, max(1, newValue)), forKey: "clearance") }
+        set { defaults.set(min(Self.clearanceRange.upperBound, max(Self.clearanceRange.lowerBound, newValue)), forKey: "clearance") }
     }
 
     var onlyWhenMenuBarHidden: Bool {

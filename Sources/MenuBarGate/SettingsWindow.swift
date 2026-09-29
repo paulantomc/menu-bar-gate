@@ -10,7 +10,9 @@ final class SettingsWindowController: NSWindowController {
     private let delaySlider = NSSlider(value: 0.75, minValue: 0.25, maxValue: 3,
                                        target: nil, action: nil)
     private let delayLabel = NSTextField(labelWithString: "")
-    private let clearanceSlider = NSSlider(value: 4, minValue: 1, maxValue: 12,
+    private let clearanceSlider = NSSlider(value: 4,
+                                            minValue: Preferences.clearanceRange.lowerBound,
+                                            maxValue: Preferences.clearanceRange.upperBound,
                                             target: nil, action: nil)
     private let clearanceLabel = NSTextField(labelWithString: "")
     private let fullscreenOnly = NSButton(checkboxWithTitle: "Protect only in full screen",
@@ -54,6 +56,7 @@ final class SettingsWindowController: NSWindowController {
         delaySlider.action = #selector(delayChanged)
         clearanceSlider.target = self
         clearanceSlider.action = #selector(clearanceChanged)
+        clearanceSlider.toolTip = "Increase clearance if the menu bar still appears, especially on a MacBook display. Range: 1–100 points."
         fullscreenOnly.target = self
         fullscreenOnly.action = #selector(fullscreenOnlyChanged)
 

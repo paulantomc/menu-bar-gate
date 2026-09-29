@@ -21,6 +21,8 @@ Click the gate icon in the menu bar to pause protection, choose **Hold a key** o
 
 **Compatibility fix in 1.1.1:** earlier builds could incorrectly require the macOS version they were compiled on, despite advertising macOS 13+. The build now explicitly targets macOS 13 and verifies the executable's real minimum version, not just the app's `Info.plist`. Quit the old copy before replacing it with the corrected app.
 
+Edge clearance is adjustable from **1 to 100 points**. If the menu bar still appears on your MacBook, increase the clearance until the pointer stops below its activation area. Use the smallest value that works for your display; larger values keep more of the top of the screen behind the gate.
+
 ## Why Accessibility permission is required
 
 macOS protects system-wide input event taps and frontmost-window accessibility attributes behind this permission. Menu Bar Gate needs those APIs to:
